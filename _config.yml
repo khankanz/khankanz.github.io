@@ -1,10 +1,8 @@
-title: "Khan Kanz"
-description: "Writings on RAG, AI, and clinical NLP"
-baseurl: ""
+title: "Zardar Khan Blog"
+description: "Writings on RAG, AI, clinical NLP"
 url: "https://khankanz.github.io"
-
-remote_theme: pages-themes/minimal@v0.2.0
+theme: minima
 plugins:
-  - jekyll-remote-theme
-
+  - jekyll-feed
+  - jekyll-seo-tag
 markdown: kramdown
