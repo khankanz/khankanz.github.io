@@ -7,8 +7,10 @@ title: Home
 
 <ul>
   {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a> — {{ post.date | date: "%Y-%m-%d" }}
+    <li style="margin-bottom: 1rem;">
+      <a href="{{ post.url }}"><strong>{{ post.title }}</strong></a> — {{ post.date | date: "%Y-%m-%d" }}  
+      <br />
+      {{ post.excerpt | strip_html | truncate: 160 }}
     </li>
   {% endfor %}
 </ul>
