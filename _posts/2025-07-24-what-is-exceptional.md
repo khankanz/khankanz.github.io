@@ -1,9 +1,9 @@
 ---
-title: On Doing Exceptional Work: A Grit-Fueled Journey Through Tech's Trenches
-date: 2025-07-24
 layout: post
+title: "On Doing Exceptional Work: A Grit-Fueled Journey Through Tech's Trenches"
+date: 2025-07-24
+categories: [nlp]
 ---
-
 Hey folks, I've been knee-deep in job hunting lately, and one question keeps hitting me like a ton of bricks: "Prove to me you've done exceptional work." As someone who's not a natural self-promoter—hell, bragging feels alien to me—it's a tough one to answer without sounding forced. But after some introspection, I realized this post could serve as a note to myself and anyone else in the same boat: the quiet grinders in a world full of hype. Exceptional work isn't about landing a NeurIPS paper (though I'd love that someday, lol) or flashing a PhD for instant nods of approval. To me, it's about grit—the raw persistence to push through obstacles, learn on the fly, and deliver when it counts.
 
 I'm happy for folks with fancy credentials; they've earned them. But credentials often miss the full picture. I've spent years overcoming hurdles, and it makes me wonder: If I ever start my own company, how do I spot talent like mine? The self-starters who don't shine on paper but crush it in the real world? This post is my attempt to unpack that, blending my career story with concrete examples. It's self-congratulatory in spots, sure, but it's born from genuine reflection on what "exceptional" really looks like.
