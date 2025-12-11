@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} — Zardar Khan</title>
+  <meta name="description" content="{{ page.excerpt | strip_html | truncate: 160 }}">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #0a0a0b;
+      --bg-elevated: #141417;
+      --bg-code: #1a1a1f;
+      --text: #e8e6e3;
+      --text-muted: #8a8a8a;
+      --accent: #4ade80;
+      --accent-dim: #22c55e;
+      --border: #2a2a2e;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Source Serif 4', Georgia, serif;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--font-serif);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+    
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .logo:hover { text-decoration: none; opacity: 0.8; }
+    
+    nav { display: flex; gap: 24px; }
+    
+    nav a {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    nav a:hover { color: var(--text); text-decoration: none; }
+    
+    /* Article */
+    article {
+      padding: 60px 0;
+    }
+    
+    .article-header {
+      margin-bottom: 48px;
+    }
+    
+    .article-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .article-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .article-tag {
+      font-size: 0.7rem;
+      color: var(--accent);
+      background: rgba(74, 222, 128, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    
+    h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    
+    /* Content */
+    .content {
+      font-size: 1.05rem;
+    }
+    
+    .content > * + * {
+      margin-top: 1.5em;
+    }
+    
+    .content h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 2.5em;
+      margin-bottom: 0.5em;
+      padding-top: 1em;
+      border-top: 1px solid var(--border);
+    }
+    
+    .content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 2em;
+      margin-bottom: 0.5em;
+    }
+    
+    .content p {
+      color: var(--text-muted);
+    }
+    
+    .content strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    .content ul, .content ol {
+      padding-left: 1.5em;
+      color: var(--text-muted);
+    }
+    
+    .content li {
+      margin-bottom: 0.5em;
+    }
+    
+    .content li::marker {
+      color: var(--accent);
+    }
+    
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.5em;
+      margin-left: 0;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    
+    .content code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: var(--bg-code);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+    }
+    
+    .content pre {
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5em;
+      overflow-x: auto;
+      font-size: 0.85rem;
+    }
+    
+    .content pre code {
+      background: none;
+      padding: 0;
+    }
+    
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3em 0;
+    }
+    
+    .content img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    
+    /* Back link */
+    .back-link {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .back-link a {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .back-link a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="/" class="logo">ZK</a>
+      <nav>
+        <a href="/#work">Work</a>
+        <a href="/blog">Writing</a>
+        <a href="/resume">Resume</a>
+        <a href="mailto:zardar.khan@icloud.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main>
+    <article>
+      <div class="container">
+        <div class="article-header">
+          <div class="article-meta">
+            <span>{{ page.date | date: "%B %d, %Y" }}</span>
+            {% if page.tags.size > 0 %}
+            <div class="article-tags">
+              {% for tag in page.tags limit:4 %}
+              <span class="article-tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          <h1>{{ page.title }}</h1>
+        </div>
+        
+        <div class="content">
+          {{ content }}
+        </div>
+        
+        <div class="back-link">
+          <a href="/blog">← Back to all posts</a>
+        </div>
+      </div>
+    </article>
+  </main>
+  
+  <footer>
+    <div class="container">
+      © 2025 Zardar Khan
+    </div>
+  </footer>
+</body>
+</html>

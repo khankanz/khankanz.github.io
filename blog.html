@@ -1,0 +1,221 @@
+---
+layout: null
+title: Writing — Zardar Khan
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing — Zardar Khan</title>
+  <meta name="description" content="Technical writing on RAG, clinical NLP, constrained decoding, and production ML systems.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #0a0a0b;
+      --bg-elevated: #141417;
+      --text: #e8e6e3;
+      --text-muted: #8a8a8a;
+      --accent: #4ade80;
+      --border: #2a2a2e;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Source Serif 4', Georgia, serif;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-serif);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { opacity: 0.8; }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+    
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    nav { display: flex; gap: 24px; }
+    
+    nav a {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    nav a:hover { color: var(--text); }
+    
+    main {
+      padding: 60px 0;
+    }
+    
+    .page-header {
+      margin-bottom: 48px;
+    }
+    
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .page-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    
+    .posts-list {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .post-item {
+      display: block;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    
+    .post-item:hover {
+      background: var(--bg-elevated);
+      margin: 0 -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    
+    .post-date {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    
+    .post-tags {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .post-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      background: rgba(74, 222, 128, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    
+    .post-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    
+    .post-item:hover .post-title {
+      color: var(--accent);
+    }
+    
+    .post-excerpt {
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="/" class="logo">ZK</a>
+      <nav>
+        <a href="/#work">Work</a>
+        <a href="/blog">Writing</a>
+        <a href="/resume">Resume</a>
+        <a href="mailto:zardar.khan@icloud.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>Writing</h1>
+        <p class="page-desc">Technical deep-dives on RAG, clinical NLP, constrained decoding, and production ML systems.</p>
+      </div>
+      
+      <div class="posts-list">
+        {% for post in site.posts %}
+        <a href="{{ post.url }}" class="post-item">
+          <div class="post-meta">
+            <span class="post-date">{{ post.date | date: "%b %Y" }}</span>
+            {% if post.tags.size > 0 %}
+            <div class="post-tags">
+              {% for tag in post.tags limit:3 %}
+              <span class="post-tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          <h2 class="post-title">{{ post.title }}</h2>
+          <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 200 }}</p>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="container">
+      © 2025 Zardar Khan
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,8 +1,31 @@
-title: "Zardar Khan Blog"
-description: "Writings on RAG, AI, clinical NLP"
+title: "Zardar Khan"
+description: "Applied AI Engineer specializing in clinical NLP systems. Production LLM pipelines in healthcare."
 url: "https://khankanz.github.io"
-theme: minima
+author: "Zardar Khan"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Plugins
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-markdown: kramdown
+  - jekyll-sitemap
+
+# Exclude files
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+
+# Permalink structure
+permalink: /:year/:month/:day/:title.html
+
+# Collections
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
