@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  <!-- Hidden state cloud -->
+  <ellipse cx="80" cy="150" rx="50" ry="35" fill="#059669" opacity="0.15" stroke="#059669" stroke-width="2"/>
+  <text x="55" y="145" font-family="monospace" font-size="8" fill="#059669">hidden</text>
+  <text x="58" y="158" font-family="monospace" font-size="8" fill="#059669">state</text>
+  <!-- Arrow to router -->
+  <path d="M140 150 L175 150" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <path d="M170 145 L180 150 L170 155" stroke="#6b7280" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Router box -->
+  <rect x="185" y="120" width="70" height="60" rx="6" fill="#fff" stroke="#059669" stroke-width="2"/>
+  <text x="198" y="145" font-family="monospace" font-size="9" fill="#059669">Router</text>
+  <text x="200" y="158" font-family="monospace" font-size="7" fill="#6b7280">semantic</text>
+  <text x="198" y="168" font-family="monospace" font-size="7" fill="#6b7280">matching</text>
+  <!-- Expert embeddings (cue cards) -->
+  <rect x="290" y="50" width="80" height="35" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="305" y="65" font-family="monospace" font-size="7" fill="#3b82f6">Law Expert</text>
+  <text x="298" y="77" font-family="monospace" font-size="6" fill="#6b7280">reasoning, docs</text>
+
+  <rect x="290" y="95" width="80" height="35" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="300" y="110" font-family="monospace" font-size="7" fill="#22c55e">Code Expert</text>
+  <text x="298" y="122" font-family="monospace" font-size="6" fill="#6b7280">syntax, logic</text>
+
+  <rect x="290" y="140" width="80" height="35" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="298" y="155" font-family="monospace" font-size="7" fill="#f59e0b">Math Expert</text>
+  <text x="295" y="167" font-family="monospace" font-size="6" fill="#6b7280">symbolic, proofs</text>
+
+  <rect x="290" y="185" width="80" height="35" rx="4" fill="#f3e8ff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="295" y="200" font-family="monospace" font-size="7" fill="#a855f7">General Expert</text>
+  <text x="305" y="212" font-family="monospace" font-size="6" fill="#6b7280">fallback</text>
+  <!-- Connection lines from router -->
+  <path d="M255 135 L285 70" stroke="#3b82f6" stroke-width="1.5" opacity="0.4"/>
+  <path d="M255 145 L285 112" stroke="#22c55e" stroke-width="2" opacity="0.8"/>
+  <path d="M255 155 L285 157" stroke="#f59e0b" stroke-width="1.5" opacity="0.4"/>
+  <path d="M255 165 L285 200" stroke="#a855f7" stroke-width="1" opacity="0.3"/>
+  <!-- Rejected stamp -->
+  <text x="40" y="260" font-family="monospace" font-size="10" fill="#dc2626" opacity="0.6" transform="rotate(-8, 40, 260)">REJECTED</text>
+  <text x="130" y="265" font-family="monospace" font-size="8" fill="#6b7280">→ revisiting</text>
+</svg>

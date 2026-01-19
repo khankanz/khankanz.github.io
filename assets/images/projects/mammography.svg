@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  <!-- Grid of image tiles -->
+  <rect x="50" y="50" width="70" height="70" rx="4" fill="#e5e7eb"/>
+  <rect x="130" y="50" width="70" height="70" rx="4" fill="#e5e7eb"/>
+  <rect x="210" y="50" width="70" height="70" rx="4" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="2"/>
+  <rect x="50" y="130" width="70" height="70" rx="4" fill="#e5e7eb"/>
+  <rect x="130" y="130" width="70" height="70" rx="4" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="2"/>
+  <rect x="210" y="130" width="70" height="70" rx="4" fill="#e5e7eb"/>
+  <!-- Labels -->
+  <circle cx="245" cy="85" r="12" fill="#059669" opacity="0.3"/>
+  <path d="M240 85 L243 88 L252 79" stroke="#059669" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="165" cy="165" r="12" fill="#059669" opacity="0.3"/>
+  <path d="M160 165 L163 168 L172 159" stroke="#059669" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Active learning arrow -->
+  <path d="M310 100 Q340 150 310 200" stroke="#059669" stroke-width="2" fill="none" stroke-dasharray="4,4"/>
+  <path d="M305 195 L310 205 L320 198" stroke="#059669" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <text x="330" y="155" font-family="monospace" font-size="10" fill="#6b7280">loop</text>
+</svg>

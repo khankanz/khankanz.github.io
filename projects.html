@@ -1,0 +1,517 @@
+---
+layout: null
+title: Projects — Zardar Khan
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Zardar Khan</title>
+  <meta name="description" content="ML projects in healthcare: constrained decoding, clinical RAG, PHI de-identification, and more.">
+  <link rel="canonical" href="https://khankanz.github.io/projects">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Nav */
+    .nav {
+      padding: 24px 0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .nav a {
+      margin-right: 24px;
+      color: var(--text-muted);
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --bg-elevated: #f8f9fa;
+      --text: #1a1a1a;
+      --text-muted: #6b7280;
+      --accent: #059669;
+      --border: #e5e7eb;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Source Serif 4', Georgia, serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-serif);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    .page-header {
+      padding: 60px 0 48px;
+    }
+
+    .page-header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    /* Projects */
+    .project {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .project {
+        grid-template-columns: 1fr;
+      }
+      .project-image {
+        order: -1;
+      }
+    }
+
+    .project-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .project h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .project-date {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .project-tagline {
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .project-body p {
+      margin-bottom: 12px;
+      color: var(--text-muted);
+    }
+
+    .project-links {
+      margin-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .project-links strong {
+      color: var(--text);
+    }
+
+    .project-links a {
+      margin-right: 16px;
+    }
+
+    .project-image {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .project-image img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+    }
+
+    .image-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Side Projects Header */
+    .side-header {
+      padding: 48px 0 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .side-header h2 {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: lowercase;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a href="/">home</a>
+      <a href="/projects">projects</a>
+      <a href="/blog">writing</a>
+      <a href="/resume">resume</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>projects</h1>
+      </div>
+
+      <div class="project" id="mammography">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>Mammography Classification</h2>
+            <span class="project-date">2026</span>
+          </div>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>PyTorch</span>
+            <span>EfficientNet</span>
+            <span>Active Learning</span>
+          </div>
+          <p class="project-tagline">DICOM view classification with minimal labels.</p>
+          <div class="project-body">
+            <p>Need to sort millions of mammography DICOMs—is this a mag view? Is a biopsy tool present? DICOM metadata is inconsistent garbage across different machines and time periods, can't trust it.</p>
+            <p>Used EfficientNet-B0 with active learning. Label 50 images, train, review what it got wrong, label those, repeat. The model tells you which samples are most informative to label next.</p>
+            <p>Hit 90% accuracy on 400 samples. Proved the concept works, now building it out with the team for full deployment.</p>
+          </div>
+          <div class="project-links">
+            <strong>Links:</strong> <a href="https://github.com/khankanz/mammogram-pipeline" target="_blank">GitHub</a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/mammography.svg" alt="Active learning classification diagram">
+        </div>
+      </div>
+
+      <div class="project" id="constrained-decoding">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>Constrained Decoding for Medical JSON</h2>
+            <span class="project-date">2025</span>
+          </div>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>LLM</span>
+            <span>llama.cpp</span>
+            <span>vLLM</span>
+          </div>
+          <p class="project-tagline">Schema-guaranteed JSON extraction from pathology reports.</p>
+          <div class="project-body">
+            <p>Prompt-only approaches hit ~67% valid JSON on pathology reports. Not good enough when you need to process 17k reports and feed them into downstream pipelines.</p>
+            <p>Built a two-stage generation system: reason first in free text, then emit constrained JSON. Iterated through multiple stacks (Outlines → XGrammar → llama.cpp → vLLM) profiling bottlenecks until fast enough for production.</p>
+            <p>180x speedup (3 min → 1 sec per report), 100% schema validity. Currently scaling to 1M+ reports.</p>
+          </div>
+          <div class="project-links">
+            <strong>Links:</strong> <a href="https://github.com/khankanz/tayz_decoding" target="_blank">GitHub</a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/constrained-decoding.svg" alt="JSON schema validation diagram">
+        </div>
+      </div>
+
+      <div class="project" id="caring-contacts">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>Caring Contacts RAG</h2>
+            <span class="project-date">2025</span>
+          </div>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>RAG</span>
+            <span>BM25</span>
+            <span>Clinical NLP</span>
+          </div>
+          <p class="project-tagline">Personalized discharge letters for psychiatric patients.</p>
+          <div class="project-body">
+            <p>Psychiatric patients benefit from personalized follow-up after discharge. The letters need to reference specific details from their stay to feel genuine—generic templates don't work.</p>
+            <p>Built a RAG system using BM25 for fast retrieval and a reranker for precision. Experimented with chunking at document, paragraph, and proposition levels—proposition-level worked best for pulling personal details. Added prompt guardrails for safety and tone.</p>
+            <p>Shipped concept to production in 3 weeks. Now in active clinical trial. Presented at ISBD 2025 (Japan) and IASR 2025 (Boston).</p>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/caring-contacts.svg" alt="RAG retrieval pipeline diagram">
+        </div>
+      </div>
+
+      <div class="project" id="phi-deidentification">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>PHI De-identification</h2>
+            <span class="project-date">2025</span>
+          </div>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>NER</span>
+            <span>Synthetic Data</span>
+            <span>GPT-4</span>
+          </div>
+          <p class="project-tagline">Hospital-specific PHI detection via synthetic data.</p>
+          <div class="project-body">
+            <p>Off-the-shelf models trained on MIMIC/i2b2 miss hospital-specific patterns—our MRN format, local clinic names, physician signatures. Needed something that works on our data.</p>
+            <p>Built a synthetic data pipeline: SQL queries to sample real PHI patterns from the clinical DB, generate fake clinical text with GPT-4 using XML placeholders, swap real identifiers back in. Train NER on that.</p>
+            <p>Improved F1 from 45% → 75% with my pipeline. Mentored a student who extended the approach to 90%.</p>
+          </div>
+          <div class="project-links">
+            <strong>Links:</strong> <a href="/2025/09/03/on-augmented-data.html">Writeup</a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/phi-deidentification.svg" alt="PHI redaction diagram">
+        </div>
+      </div>
+
+      <div class="project" id="fhir-extraction">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>FHIR Extraction Pipeline</h2>
+            <span class="project-date">2024</span>
+          </div>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>PostgreSQL</span>
+            <span>FHIR</span>
+          </div>
+          <p class="project-tagline">700x speedup on clinical report extraction.</p>
+          <div class="project-body">
+            <p>Needed to pull 2M+ clinical reports for research. Existing queries took 120 days for a full batch—completely unusable for iterative work.</p>
+            <p>Reverse-engineered the undocumented Observation → DiagnosticReport structure. Nobody had written it down. Added temporary PostgreSQL indexes on the join keys.</p>
+            <p>120 days → 4 hours (700x speedup). Also discovered 500k missing pathology reports from old import errors and built a system to reconstruct them.</p>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/fhir-extraction.svg" alt="FHIR data pipeline diagram">
+        </div>
+      </div>
+
+      <div class="side-header">
+        <h2>side projects</h2>
+      </div>
+
+      <div class="project" id="pronunciation-app">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>Pronunciation App</h2>
+            <span class="project-date">2026</span>
+          </div>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>Whisper</span>
+            <span>LLM</span>
+          </div>
+          <p class="project-tagline">LLM-as-judge for my daughter's reading practice.</p>
+          <div class="project-body">
+            <p>My daughter reads Harry Potter but says "marriage" for "mirage". Strong comprehension, weak decoding. Wanted something that could give her real-time feedback.</p>
+            <p>Built a pipeline: speech → IPA transcription → compare against gold pronunciation → LLM-as-judge with rubric scoring. Built it in evening sessions with her as the tester.</p>
+            <p>Working prototype. Customer base of 1, retention 100%.</p>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/pronunciation.svg" alt="Speech to IPA pipeline">
+        </div>
+      </div>
+
+      <div class="project" id="roblox-guide">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>Roblox Game Guide</h2>
+            <span class="project-date">2026</span>
+          </div>
+          <div class="project-tags">
+            <span>Lua</span>
+            <span>Roblox Studio</span>
+            <span>Tutorial</span>
+          </div>
+          <p class="project-tagline">Teaching game dev to a 7-year-old.</p>
+          <div class="project-body">
+            <p>Wanted to teach my daughter game development. Documented the process as a step-by-step tutorial so other parents could do the same.</p>
+            <p>She built her first game—a Harry Potter themed escape room. Deployed the guide on Vercel.</p>
+          </div>
+          <div class="project-links">
+            <strong>Links:</strong> <a href="https://chamber-of-secrets-six.vercel.app/" target="_blank">Guide</a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/roblox.svg" alt="Roblox game blocks and code">
+        </div>
+      </div>
+
+      <div class="project" id="raro-implementation">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>RARO Paper Implementation</h2>
+            <span class="project-date">2025</span>
+          </div>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>PyTorch</span>
+            <span>Research</span>
+          </div>
+          <p class="project-tagline">Attempted replication of "Escaping the Verifier".</p>
+          <div class="project-body">
+            <p>Read "Escaping the Verifier: Learning to Reason via Demonstrations". The idea was compelling—train a model to generate reasoning chains that fool a verifier. Wanted to see if it worked.</p>
+            <p>Implemented it on Colab, trained it. It got worse. Learned why—the training signal wasn't strong enough to overcome the base model's priors. Sometimes negative results are the most educational.</p>
+          </div>
+          <div class="project-links">
+            <strong>Links:</strong> <a href="https://colab.research.google.com/gist/khankanz/ae1a369d2cc394a2c44ffcb914086be6/escaping-the-verifier.ipynb" target="_blank">Colab</a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/raro.svg" alt="Training loss chart showing failure">
+        </div>
+      </div>
+
+      <div class="project" id="semantic-router">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>Semantic Routers for MoE</h2>
+            <span class="project-date">2025</span>
+          </div>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>PyTorch</span>
+            <span>MoE</span>
+            <span>GPT-2</span>
+          </div>
+          <p class="project-tagline">Cohere fellowship pitch. Got rejected. Revisiting at tiny scale.</p>
+          <div class="project-body">
+            <p>Applied for Cohere's fellowship: "take one of our papers, propose a change." Chose their BAM paper on upcycling FFNs into Mixture-of-Experts. The limitation: linear routers do domain matching only. Legal tokens go to law expert, but miss cross-domain skills.</p>
+            <p>Proposed learnable expert embeddings—"cue cards" encoding capabilities like symbolic reasoning, not just domains. Router matches hidden states to embeddings, discovering unexpected expertise.</p>
+            <p>Grokked some online GPUs, trained GPT-2 domain experts (Law, Code, Math, General), built the MoE, observed the router. Got rejected. Recently revisiting at tiny scale first—Karpathy's advice.</p>
+          </div>
+          <div class="project-links">
+            <strong>Links:</strong> <a href="/assets/Routers With Semantic Grounding for Upcycled Experts.pdf" target="_blank">Pitch Deck</a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/semantic-router.svg" alt="Router matching hidden states to expert embeddings">
+        </div>
+      </div>
+
+      <div class="project" id="radiomics-rf">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>Radiomics vs. Learned Features</h2>
+            <span class="project-date">2025</span>
+          </div>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>PyRadiomics</span>
+            <span>SimpleITK</span>
+            <span>Random Forest</span>
+          </div>
+          <p class="project-tagline">Bored of Titanic, used pathology images instead.</p>
+          <div class="project-body">
+            <p>Wanted to learn Random Forests properly. Couldn't stomach another Titanic tutorial. Grabbed PCam instead—262k pathology patches of metastatic tissue from whole slide images.</p>
+            <p>Converted H5 to ImageNet format, extracted traditional radiomics features (GLCM, GLRLM, texture stats), trained a classifier. It worked, but barely.</p>
+            <p>Turns out handcrafted radiomics is mid. You need learned feature extractors. The boring way would've taught me the same sklearn API with less insight.</p>
+          </div>
+          <div class="project-links">
+            <strong>Links:</strong> <a href="https://colab.research.google.com/drive/1emLUNy1WSbsIFIcOQmLxElztY-hx5pp6" target="_blank">Dataset Prep</a> <a href="https://colab.research.google.com/drive/1N9xQSwPiuy15yRlh83Gk81XK8N6vf_rb" target="_blank">Feature Extraction</a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/radiomics.svg" alt="Pathology image to feature matrix">
+        </div>
+      </div>
+
+      <div class="project" id="bookkeeping-agent">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>Bookkeeping Agent</h2>
+            <span class="project-date">2025</span>
+          </div>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>Claude</span>
+            <span>DuckDB</span>
+            <span>Pydantic</span>
+          </div>
+          <p class="project-tagline">Built tools for a financial agent from scratch.</p>
+          <div class="project-body">
+            <p>Interviewing for a role at a financial agents company. Wanted to understand the patterns by building, not reading.</p>
+            <p>Started with file I/O tools, added Pydantic structured extraction for bank statements. Hit context limits on large files—split by pages. Calculator tool failed on transcription errors, pivoted to DuckDB for SQL queries directly on CSVs. That was the breakthrough.</p>
+            <p>Ran it on my own statements. Found I was spending $70/month on Starbucks. Bought a coffee machine for $40.</p>
+          </div>
+          <div class="project-links">
+            <strong>Links:</strong> <a href="https://colab.research.google.com/gist/khankanz/02d572ad56a40f10771a87abd9decddb/build-an-ai-agent-from-scratch.ipynb" target="_blank">Colab</a> <a href="/assets/AI AGENTS INTRO.pptx.pdf" target="_blank">Slides</a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/bookkeeping-agent.svg" alt="SQL query on financial data">
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2025 Zardar Khan
+    </div>
+  </footer>
+</body>
+</html>

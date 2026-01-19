@@ -8,519 +8,365 @@ title: Resume — Zardar Khan
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resume — Zardar Khan</title>
-  <meta name="description" content="Applied Research Engineer specializing in clinical NLP systems. 4+ years shipping production LLM pipelines in healthcare.">
-  
+  <meta name="description" content="Applied Research Engineer specializing in clinical NLP systems.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
-  
+
   <style>
+    /* Nav */
+    .nav {
+      padding: 24px 0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .nav a {
+      margin-right: 24px;
+      color: var(--text-muted);
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
     :root {
-      --bg: #0a0a0b;
-      --bg-elevated: #141417;
-      --text: #e8e6e3;
-      --text-muted: #8a8a8a;
-      --accent: #4ade80;
-      --border: #2a2a2e;
+      --bg: #ffffff;
+      --bg-elevated: #f8f9fa;
+      --text: #1a1a1a;
+      --text-muted: #6b7280;
+      --accent: #059669;
+      --border: #e5e7eb;
       --font-mono: 'JetBrains Mono', monospace;
       --font-serif: 'Source Serif 4', Georgia, serif;
     }
-    
+
     @media print {
       :root {
         --bg: #fff;
         --bg-elevated: #f5f5f5;
         --text: #111;
         --text-muted: #555;
-        --accent: #16a34a;
+        --accent: #059669;
         --border: #ddd;
       }
-      
+
       body { padding: 0; }
       .container { max-width: 100%; padding: 0; }
-      header, .download-bar { display: none !important; }
+      .page-header, .download-bar { display: none !important; }
       .resume-content { padding: 0; margin: 0; }
       a { color: var(--text); }
     }
-    
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+
     body {
       font-family: var(--font-serif);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
       min-height: 100vh;
     }
-    
+
     a { color: var(--accent); text-decoration: none; }
-    a:hover { opacity: 0.8; }
-    
+    a:hover { text-decoration: underline; }
+
     .container {
-      max-width: 900px;
+      max-width: 680px;
       margin: 0 auto;
       padding: 0 24px;
     }
-    
-    /* Header */
-    header {
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-      z-index: 100;
-    }
-    
-    .header-inner {
+
+    .page-header {
+      padding: 80px 0 24px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: baseline;
     }
-    
-    .logo {
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
+
+    .page-header h1 {
+      font-size: 1.5rem;
       font-weight: 600;
-      color: var(--text);
+      letter-spacing: -0.01em;
     }
-    
-    nav { display: flex; gap: 24px; }
-    
-    nav a {
+
+    .back-link {
       font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-size: 0.85rem;
     }
-    
-    nav a:hover { color: var(--text); }
-    
-    /* Download Bar */
+
     .download-bar {
-      background: var(--bg-elevated);
-      border-bottom: 1px solid var(--border);
       padding: 16px 0;
-    }
-    
-    .download-inner {
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    
+
     .download-info {
       font-family: var(--font-mono);
       font-size: 0.8rem;
       color: var(--text-muted);
     }
-    
+
     .download-btn {
       font-family: var(--font-mono);
       font-size: 0.8rem;
       padding: 8px 16px;
       background: var(--accent);
-      color: var(--bg);
+      color: #fff;
       border-radius: 6px;
       font-weight: 500;
       display: inline-flex;
       align-items: center;
       gap: 8px;
     }
-    
-    .download-btn:hover { opacity: 0.9; }
-    
+
+    .download-btn:hover { opacity: 0.9; text-decoration: none; }
+
     .download-btn svg {
       width: 16px;
       height: 16px;
     }
-    
-    /* Resume Content */
-    .resume-content {
-      padding: 48px 0;
-    }
-    
-    .resume-header {
+
+    .resume-section {
       margin-bottom: 40px;
-      padding-bottom: 32px;
+    }
+
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: lowercase;
+      letter-spacing: 0.02em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
     }
-    
-    .resume-name {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.02em;
-    }
-    
+
     .resume-contact {
       font-family: var(--font-mono);
       font-size: 0.85rem;
       color: var(--text-muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 24px;
+      margin-bottom: 16px;
     }
-    
+
     .resume-contact a {
       color: var(--text-muted);
+      margin-right: 16px;
     }
-    
+
     .resume-contact a:hover {
       color: var(--accent);
     }
-    
+
     .resume-summary {
-      font-size: 1.1rem;
       color: var(--text-muted);
-      margin-top: 20px;
-      line-height: 1.7;
-      max-width: 700px;
+      margin-bottom: 0;
     }
-    
-    /* Sections */
-    .resume-section {
-      margin-bottom: 40px;
-    }
-    
-    .section-title {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 20px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    /* Skills */
+
     .skills-grid {
       display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 12px 24px;
+      grid-template-columns: 120px 1fr;
+      gap: 8px 24px;
     }
-    
+
     @media (max-width: 600px) {
       .skills-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 12px;
       }
     }
-    
+
     .skill-category {
       font-family: var(--font-mono);
       font-size: 0.8rem;
       color: var(--text-muted);
     }
-    
+
     .skill-items {
       font-size: 0.95rem;
-      line-height: 1.6;
+      color: var(--text-muted);
     }
-    
-    /* Projects */
-    .project {
+
+    .experience {
       margin-bottom: 28px;
     }
-    
-    .project:last-child {
-      margin-bottom: 0;
-    }
-    
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 8px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    
-    .project-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-    
-    .project-date {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    
-    .project ul {
-      padding-left: 20px;
-      color: var(--text-muted);
-    }
-    
-    .project li {
-      margin-bottom: 6px;
-      line-height: 1.6;
-    }
-    
-    .project li::marker {
-      color: var(--accent);
-    }
-    
-    /* Experience */
-    .experience {
-      margin-bottom: 32px;
-    }
-    
+
     .experience:last-child {
       margin-bottom: 0;
     }
-    
+
     .exp-header {
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
-    
+
     .exp-company {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 600;
     }
-    
+
     .exp-meta {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 4px 16px;
       font-family: var(--font-mono);
       font-size: 0.8rem;
       color: var(--text-muted);
     }
-    
+
     .experience ul {
       padding-left: 20px;
       color: var(--text-muted);
     }
-    
+
     .experience li {
-      margin-bottom: 8px;
-      line-height: 1.6;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
     }
-    
+
     .experience li::marker {
       color: var(--accent);
     }
-    
-    /* Publications */
+
     .publication {
-      margin-bottom: 16px;
-      padding-left: 16px;
-      border-left: 2px solid var(--border);
+      margin-bottom: 12px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
     }
-    
+
     .publication:last-child {
       margin-bottom: 0;
     }
-    
+
     .pub-title {
-      font-weight: 600;
-      margin-bottom: 4px;
+      color: var(--text);
+      font-weight: 500;
     }
-    
-    .pub-venue {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    
-    /* Education */
+
     .education {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
+      color: var(--text-muted);
     }
-    
+
     .edu-degree {
-      font-weight: 600;
+      color: var(--text);
+      font-weight: 500;
     }
-    
-    .edu-school {
-      color: var(--text-muted);
-    }
-    
-    .edu-location {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    
+
     footer {
       padding: 32px 0;
       text-align: center;
       font-family: var(--font-mono);
       font-size: 0.75rem;
       color: var(--text-muted);
-      border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+
+    @media (max-width: 640px) {
+      .page-header { padding: 48px 0 16px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container header-inner">
-      <a href="/" class="logo">ZK</a>
-      <nav>
-        <a href="/#work">Work</a>
-        <a href="/#writing">Writing</a>
-        <a href="/resume">Resume</a>
-        <a href="mailto:zardar.khan@icloud.com">Contact</a>
-      </nav>
-    </div>
-  </header>
-  
-  <div class="download-bar">
-    <div class="container download-inner">
-      <span class="download-info">Last updated: December 2025</span>
-      <a href="/assets/Zardar_Khan_Resume.pdf" download class="download-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        Download PDF
-      </a>
-    </div>
-  </div>
-  
-  <main class="resume-content">
+  <nav class="nav">
     <div class="container">
-      <div class="resume-header">
-        <h1 class="resume-name">Zardar Khan</h1>
+      <a href="/">home</a>
+      <a href="/projects">projects</a>
+      <a href="/blog">writing</a>
+      <a href="/resume">resume</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>resume</h1>
+      </div>
+
+      <div class="download-bar">
+        <span class="download-info">last updated: jan 2026</span>
+        <a href="/assets/Zardar_Khan_Resume.pdf" download class="download-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          download pdf
+        </a>
+      </div>
+
+      <div class="resume-section">
         <div class="resume-contact">
           <a href="mailto:zardar.khan@icloud.com">zardar.khan@icloud.com</a>
-          <a href="https://linkedin.com/in/zardar-khan">linkedin.com/in/zardar-khan</a>
-          <a href="https://github.com/khankanz">github.com/khankanz</a>
-          <a href="https://khankanz.github.io">khankanz.github.io</a>
-          <span>Toronto, ON</span>
+          <a href="https://github.com/khankanz">github</a>
+          <a href="https://linkedin.com/in/zardar-khan">linkedin</a>
         </div>
         <p class="resume-summary">
-          Applied Research Engineer specializing in clinical NLP systems. 4+ years shipping production LLM pipelines in healthcare: structured report generation (constrained decoding), clinical RAG, PHI de-identification. Track record of rapid execution — concept to production in weeks, paper to implementation in days.
+          research software engineer building ml systems in healthcare. constrained decoding, clinical rag, phi de-identification. i ship fast and go deep.
         </p>
       </div>
-      
+
       <div class="resume-section">
-        <h2 class="section-title">Core Skills</h2>
+        <h2 class="section-title">skills</h2>
         <div class="skills-grid">
-          <span class="skill-category">LLMs & NLP</span>
-          <span class="skill-items">Hugging Face Transformers • llama.cpp • RAG pipelines • Constrained decoding (Outlines/XGrammar/GBNF) • Knowledge distillation • Model quantization</span>
-          
-          <span class="skill-category">Infrastructure</span>
-          <span class="skill-items">FastAPI • Docker • AWS/Azure • Postgres • FHIR/OMOP</span>
-          
-          <span class="skill-category">Core</span>
-          <span class="skill-items">PyTorch • Python • Pydantic • SQL</span>
+          <span class="skill-category">llms & nlp</span>
+          <span class="skill-items">transformers, llama.cpp, vllm, rag, tool-use agents, constrained decoding, ner</span>
+
+          <span class="skill-category">infra</span>
+          <span class="skill-items">fastapi, docker, postgres, fhir/omop</span>
+
+          <span class="skill-category">core</span>
+          <span class="skill-items">python, pytorch, sql</span>
         </div>
       </div>
-      
+
       <div class="resume-section">
-        <h2 class="section-title">Selected Projects</h2>
-        
-        <div class="project">
-          <div class="project-header">
-            <span class="project-title">Constrained Decoding (CRANE-style) for Structured Medical JSON</span>
-            <span class="project-date">2025 — Present</span>
-          </div>
-          <ul>
-            <li>Built constrained decoding pipeline converting free-text pathology reports to schema-valid CAPeCC (DCIS Resection) JSON; achieved 100% schema validity on TCGA and internal pilot samples</li>
-            <li>Implemented free-reason → switch-token → JSON window generation; ported from Hugging Face to llama.cpp (GGUF) for large-model inference on A100s</li>
-            <li>Diagnosed and patched Outlines → llama.cpp logits incompatibility breaking FSM-based token masking; enabled cross-stack constrained generation</li>
-            <li>Approved to scale to 17K reports; optimizing inference via XGrammar port (targeting sub-1 min from current 1-3 min/report)</li>
-          </ul>
-        </div>
-        
-        <div class="project">
-          <div class="project-header">
-            <span class="project-title">Clinical RAG — Caring Contacts</span>
-            <span class="project-date">2024</span>
-          </div>
-          <ul>
-            <li>Collaborated with Psychiatry to build RAG system generating personalized post-discharge hope letters from patient charts</li>
-            <li>Implemented proposition-level chunking + two-stage retrieval (BM25 → Qwen reranker) with clinician-defined safety guardrails</li>
-            <li>Shipped concept to production in 3 weeks; system now in clinical trial (ISBD 2025 poster presentation)</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="resume-section">
-        <h2 class="section-title">Professional Experience</h2>
-        
+        <h2 class="section-title">experience</h2>
+
         <div class="experience">
           <div class="exp-header">
             <div class="exp-company">Sunnybrook Research Institute</div>
-            <div class="exp-meta">
-              <span>Research Software Engineer</span>
-              <span>Sept 2023 – Present · Toronto, ON</span>
-            </div>
+            <div class="exp-meta">research software engineer · sept 2023 – present · toronto</div>
           </div>
           <ul>
-            <li>Built FHIR data extraction pipeline scaling from 20K to 2M+ clinical reports; reducing batch processing time from 120 days to &lt;4 hours (700x speedup) by implementing temporary indexing tables in Postgres</li>
-            <li>Led PHI de-identification from 45% to 75% F1 using synthetic data generation + GPT-4 knowledge distillation; mentored student who extended approach to 90% F1 on held-out test set</li>
-            <li>Shipped clinical RAG system in 3 weeks from concept to production; generates post-discharge communications for psychiatric patients using proposition-level chunking + two-stage retrieval (BM25→Qwen reranker); deployed with clinician-in-the-loop safety guardrails, now in clinical trial</li>
-            <li>Quantized RadBERT microcalcification classifier from 450ms → &lt;100ms (4.5x speedup) preserving 95% accuracy; work accepted for Oral Presentation at IGTxIMNO 2024</li>
+            <li>built constrained decoding pipeline for pathology reports—180x speedup, 100% schema validity on 17k reports</li>
+            <li>shipped clinical rag system in 3 weeks, now in clinical trial for psychiatric discharge letters</li>
+            <li>created synthetic data pipeline for phi detection—45% → 90% F1</li>
+            <li>reverse-engineered fhir data model, reduced extraction time from 120 days to 4 hours</li>
           </ul>
         </div>
-        
+
         <div class="experience">
           <div class="exp-header">
             <div class="exp-company">gojitech</div>
-            <div class="exp-meta">
-              <span>Software Engineer</span>
-              <span>Aug 2021 – Sept 2023 · Toronto, ON</span>
-            </div>
+            <div class="exp-meta">software engineer · aug 2021 – sept 2023 · toronto</div>
           </div>
           <ul>
-            <li>Reduced prototype feedback cycle from 2+ weeks to 1.5 weeks through on-site clinical shadowing and workflow redesign</li>
-            <li>Diagnosed & resolved Chrome 2GB tab memory limitation affecting voice recording; implemented streaming audio compression, eliminating data loss for long clinical sessions</li>
-            <li>Rebuilt clinical transcription from batch (30s max, 5-10s latency) to real-time streaming; implemented WebSocket architecture with Azure STT delivering live intermediate → final transcript refinement as users speak</li>
+            <li>rebuilt clinical transcription from batch to real-time streaming with azure stt</li>
+            <li>diagnosed chrome memory limits breaking voice recording, implemented streaming compression</li>
           </ul>
         </div>
-        
+
         <div class="experience">
           <div class="exp-header">
-            <div class="exp-company">Techna Institute (Health Informatics)</div>
-            <div class="exp-meta">
-              <span>Business Application Analyst</span>
-              <span>Nov 2018 – Nov 2020 · Toronto, ON</span>
-            </div>
+            <div class="exp-company">Techna Institute</div>
+            <div class="exp-meta">business application analyst · nov 2018 – nov 2020 · toronto</div>
           </div>
         </div>
       </div>
-      
+
       <div class="resume-section">
-        <h2 class="section-title">Publications & Presentations</h2>
-        
-        <div class="publication">
-          <div class="pub-title">Khan Z et al. AI-Personalized Caring Contacts for Psychiatric Discharge</div>
-          <div class="pub-venue">IASR International Summit, Boston — 2025 — Poster</div>
-        </div>
-        
-        <div class="publication">
-          <div class="pub-title">Khan Z et al. AI-Enabled Suicide Prevention via Caring Contacts</div>
-          <div class="pub-venue">ISBD Annual Conference, Chiba, Japan — 2025 — Poster</div>
-        </div>
-        
-        <div class="publication">
-          <div class="pub-title">Khan Z et al. RadBERT Microcalcification Classifier (95% accuracy)</div>
-          <div class="pub-venue">IGTxIMNO 2024 — Oral Presentation</div>
-        </div>
+        <h2 class="section-title">publications</h2>
+        <p class="publication"><span class="pub-title">AI-Personalized Caring Contacts</span> — IASR 2025, ISBD 2025</p>
+        <p class="publication"><span class="pub-title">RadBERT Microcalcification Classifier</span> — IGTxIMNO 2024 (oral)</p>
       </div>
-      
+
       <div class="resume-section">
-        <h2 class="section-title">Education</h2>
-        <div class="education">
-          <div>
-            <span class="edu-degree">Bachelor of Engineering, Biomedical Engineering</span>
-            <span class="edu-school"> — Toronto Metropolitan University</span>
-          </div>
-          <span class="edu-location">Toronto, ON</span>
-        </div>
+        <h2 class="section-title">education</h2>
+        <p class="education"><span class="edu-degree">BEng, Biomedical Engineering</span> — Toronto Metropolitan University</p>
       </div>
     </div>
   </main>
-  
+
   <footer>
     <div class="container">
       © 2025 Zardar Khan
