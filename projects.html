@@ -411,7 +411,7 @@ title: Projects — Zardar Khan
             <span>FastHTML</span>
             <span>Claude API</span>
           </div>
-          <p class="project-tagline">Tired of job boards. Built my own from SEC filings.</p>
+          <p class="project-tagline">Turned SEC filings into a job hunting pipeline.</p>
           <div class="project-body">
             <p>Every company raising $5M-$60M in the US files a Form D with the SEC. That's Series A/B territory. The data is public, machine-readable, and nobody's using it for job hunting.</p>
             <p>Built a pipeline that pulls the daily SEC EDGAR index, filters for the funding range, and stores everything in DuckDB via append-only JSONL. The catch: Form D is noisy—real estate funds, SPVs, holding companies all file too. Added an LLM filter: OpenAI classifies each filing as "real startup" or "fund/SPV" based on name + industry + filing patterns.</p>
