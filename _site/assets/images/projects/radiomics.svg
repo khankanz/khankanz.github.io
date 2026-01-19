@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  <!-- Pathology patch (pink tissue) -->
+  <rect x="40" y="80" width="100" height="100" rx="4" fill="#fce7f3" stroke="#e5e7eb" stroke-width="2"/>
+  <!-- Cellular dots -->
+  <circle cx="60" cy="100" r="6" fill="#db2777" opacity="0.4"/>
+  <circle cx="85" cy="95" r="8" fill="#db2777" opacity="0.3"/>
+  <circle cx="110" cy="105" r="5" fill="#db2777" opacity="0.5"/>
+  <circle cx="70" cy="130" r="7" fill="#db2777" opacity="0.35"/>
+  <circle cx="100" cy="140" r="6" fill="#db2777" opacity="0.45"/>
+  <circle cx="120" cy="120" r="4" fill="#db2777" opacity="0.4"/>
+  <circle cx="55" cy="160" r="5" fill="#db2777" opacity="0.3"/>
+  <circle cx="90" cy="155" r="7" fill="#db2777" opacity="0.4"/>
+  <circle cx="115" cy="165" r="5" fill="#db2777" opacity="0.35"/>
+  <!-- Arrow -->
+  <path d="M160 130 L200 130" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <path d="M195 125 L205 130 L195 135" stroke="#6b7280" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Feature matrix -->
+  <rect x="220" y="70" width="140" height="120" rx="4" fill="#fff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="235" y="95" font-family="monospace" font-size="8" fill="#6b7280">GLCM</text>
+  <rect x="275" y="85" width="70" height="8" rx="2" fill="#059669" opacity="0.3"/>
+  <text x="235" y="115" font-family="monospace" font-size="8" fill="#6b7280">GLRLM</text>
+  <rect x="275" y="105" width="50" height="8" rx="2" fill="#059669" opacity="0.4"/>
+  <text x="235" y="135" font-family="monospace" font-size="8" fill="#6b7280">NGTDM</text>
+  <rect x="275" y="125" width="60" height="8" rx="2" fill="#059669" opacity="0.35"/>
+  <text x="235" y="155" font-family="monospace" font-size="8" fill="#6b7280">GLDM</text>
+  <rect x="275" y="145" width="40" height="8" rx="2" fill="#059669" opacity="0.25"/>
+  <text x="235" y="175" font-family="monospace" font-size="8" fill="#6b7280">1stOrd</text>
+  <rect x="275" y="165" width="55" height="8" rx="2" fill="#059669" opacity="0.3"/>
+  <!-- "meh" indicator -->
+  <text x="270" y="230" font-family="monospace" font-size="14" fill="#6b7280">¯\_(ツ)_/¯</text>
+  <text x="265" y="250" font-family="monospace" font-size="9" fill="#6b7280">it's mid</text>
+</svg>

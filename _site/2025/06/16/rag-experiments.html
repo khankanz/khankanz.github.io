@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG Experiments: Chunking, Retrieval, Reformulation — Zardar Khan</title>
+  <meta name="description" content="Chunking, hybrid retrieval, and reformulation strategies for clinical RAG pipelines, including Dense X Retrieval and proposition-based methods.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Nav */
+    .nav {
+      padding: 24px 0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .nav a {
+      margin-right: 24px;
+      color: var(--text-muted);
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --bg-elevated: #f8f9fa;
+      --bg-code: #f1f3f5;
+      --text: #1a1a1a;
+      --text-muted: #6b7280;
+      --accent: #059669;
+      --border: #e5e7eb;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Source Serif 4', Georgia, serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-serif);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    article {
+      padding: 80px 0 48px;
+    }
+
+    .article-header {
+      margin-bottom: 48px;
+    }
+
+    .article-meta {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .back-link {
+      margin-right: 16px;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .content {
+      font-size: 1.05rem;
+    }
+
+    .content > * + * {
+      margin-top: 1.5em;
+    }
+
+    .content h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-top: 2.5em;
+      margin-bottom: 0.5em;
+      padding-top: 1em;
+      border-top: 1px solid var(--border);
+    }
+
+    .content h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 2em;
+      margin-bottom: 0.5em;
+    }
+
+    .content p {
+      color: var(--text-muted);
+    }
+
+    .content strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .content ul, .content ol {
+      padding-left: 1.5em;
+      color: var(--text-muted);
+    }
+
+    .content li {
+      margin-bottom: 0.5em;
+    }
+
+    .content li::marker {
+      color: var(--accent);
+    }
+
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.5em;
+      margin-left: 0;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .content code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: var(--bg-code);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+    }
+
+    .content pre {
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5em;
+      overflow-x: auto;
+      font-size: 0.85rem;
+    }
+
+    .content pre code {
+      background: none;
+      padding: 0;
+    }
+
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3em 0;
+    }
+
+    .content img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .post-footer {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 640px) {
+      article { padding: 48px 0 32px; }
+      h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a href="/">home</a>
+      <a href="/projects">projects</a>
+      <a href="/blog">writing</a>
+      <a href="/resume">resume</a>
+    </div>
+  </nav>
+
+  <main>
+    <article>
+      <div class="container">
+        <div class="article-header">
+          <div class="article-meta">
+            <span>Jun 16, 2025</span>
+          </div>
+          <h1>RAG Experiments: Chunking, Retrieval, Reformulation</h1>
+        </div>
+
+        <div class="content">
+          <p>This post summarizes my experiments building a Retrieval-Augmented Generation (RAG) system over psychiatric discharge documentation. The goal: enable clinicians to ask meaningful, nuanced questions about patients’ post-discharge outlook and care.</p>
+
+<hr />
+
+<h2 id="task">Task</h2>
+
+<p>Given a set of de-identified patient charts (e.g., progress notes, treatment summaries), we want to support natural language queries such as:</p>
+
+<ul>
+  <li><em>What sentiment or tone should I approach the patient with?</em></li>
+  <li><em>Does the patient have any future plans to look forward to?</em></li>
+  <li><em>Has the patient acknowledged the importance of follow-up care?</em></li>
+</ul>
+
+<p>These questions require drawing subtle inferences from free-text notes, making structured QA difficult to scale manually.</p>
+
+<hr />
+
+<h2 id="background-embedding-breakdown">Background: Embedding Breakdown</h2>
+
+<p>In earlier work, I experimented with general, biomedical, and radiology-specific embedding models to classify microcalcification status from mammography reports — <em>Positive</em>, <em>Negative</em>, or <em>Not Specified</em>. Despite domain tuning, none of the models captured the specific, sparse signal required for this task.</p>
+
+<blockquote>
+  <p>That failure was formative. It showed me that off-the-shelf embedding models often fail to preserve fine-grained clinical meaning — especially when used naïvely in dense retrieval setups.</p>
+</blockquote>
+
+<p>This led me to reevaluate how retrieval pipelines are designed: how documents are chunked, how user queries are interpreted, and how semantic drift is corrected.</p>
+
+<hr />
+
+<h2 id="rag-recap-with-notation">RAG Recap (with Notation)</h2>
+
+<p>We want to answer user queries over a corpus <code class="language-plaintext highlighter-rouge">C</code> of clinical documents.</p>
+
+<p><strong>Baseline setup:</strong></p>
+
+<ol>
+  <li>Each document <code class="language-plaintext highlighter-rouge">D ∈ C</code> → <code class="language-plaintext highlighter-rouge">M</code> → <code class="language-plaintext highlighter-rouge">D~embedded~</code></li>
+  <li>User query <code class="language-plaintext highlighter-rouge">U</code> → <code class="language-plaintext highlighter-rouge">M</code> → <code class="language-plaintext highlighter-rouge">U~embedded~</code></li>
+  <li>Compute similarity between <code class="language-plaintext highlighter-rouge">U~embedded~</code> and all <code class="language-plaintext highlighter-rouge">D~embedded~</code> (typically cosine)</li>
+  <li>Take top-k matches → feed into an LLM alongside the original query</li>
+</ol>
+
+<blockquote>
+  <p>This architecture assumes <code class="language-plaintext highlighter-rouge">D~embedded~</code> captures all relevant content in a fixed-length vector. It doesn’t. Compressing complex clinical notes into dense vectors makes it hard to recover granular information — especially when queries are vague or compositional.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="chunking-from-naive-to-proposition">Chunking: From Naive to Proposition</h2>
+
+<p>My early chunking attempts included:</p>
+
+<ul>
+  <li>Line-by-line splits</li>
+  <li>Paragraphs</li>
+  <li>Sentence-level tokens</li>
+</ul>
+
+<p>None worked well. Small chunks led to hallucinations. Paragraphs introduced noise. Sentence splits broke context mid-thought.</p>
+
+<p>This problem was highlighted in:</p>
+<ul>
+  <li>Skylar Payne’s <em>RAG Anti-patterns</em></li>
+  <li>ChromaDB’s chunking discussion with Anton</li>
+</ul>
+
+<p>I pivoted to proposition-based chunking from the paper <em>Dense × Retrieval</em>. Each document was decomposed into standalone, simplified statements:</p>
+
+<blockquote>
+  <p>Each proposition is a single idea. Pronouns are replaced. Structure is flattened. Every chunk stands on its own and aligns more naturally with user questions.</p>
+</blockquote>
+
+<p>I used GPT-4 to generate these propositions, formatted as JSON. Example prompt:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"Jordan M. has been provided with a calendar reminder for the intake appointment."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Jordan M. expressed motivation to continue structured therapy."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"The outpatient plan is acknowledged by Jordan M. as a good next step."</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="hybrid-retrieval-fixing-similarity-drift">Hybrid Retrieval: Fixing Similarity Drift</h2>
+
+<p>Dense-only retrieval struggled due to mismatched language between user queries and document style.</p>
+
+<p>To fix this, I adopted <strong>hybrid retrieval</strong>:</p>
+
+<ol>
+  <li>Use <strong>BM25</strong> to retrieve top-100 candidates based on keyword overlap</li>
+  <li>Embed user query + candidate chunks</li>
+  <li>Rerank using cosine similarity → return top-k</li>
+</ol>
+
+<blockquote>
+  <p>BM25 is fast and brittle. Dense models are semantic but noisy. Combining them gave the best of both — lexical recall followed by semantic precision.</p>
+</blockquote>
+
+<p>This reduced irrelevant matches and ensured we only embedded promising candidates.</p>
+
+<hr />
+
+<h2 id="query-reformulation">Query Reformulation</h2>
+
+<p>User queries are often vague. Even with proposition chunks, retrieval underperformed.</p>
+
+<p>So I used GPT-4 to rewrite user queries to match the structure of my chunks:</p>
+
+<h3 id="input">Input:</h3>
+<blockquote>
+  <p>Does the patient have anything they’re looking forward to?</p>
+</blockquote>
+
+<h3 id="reformulated">Reformulated:</h3>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"Is the patient looking forward to any specific events?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Is the patient anticipating any particular activities?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Does the patient have any future plans they are excited about?"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Reformulated queries were simpler, explicit, and structurally aligned with the chunk format. This made reranking sharper and generation stronger.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="generation-outcomes">Generation Outcomes</h2>
+
+<p>Query: <em>Is the patient looking forward to any specific events?</em></p>
+
+<hr />
+
+<p><strong>🔹 Qwen2.5-7B</strong></p>
+
+<blockquote>
+  <p>“Revisiting discharge planning on June 3, 2025.”</p>
+</blockquote>
+
+<p>❌ Extracts a date but misses intent. Literal match, low relevance.</p>
+
+<hr />
+
+<p><strong>🔹 Qwen2.5-14B</strong></p>
+
+<blockquote>
+  <p>“Jordan M. is looking forward to the intake appointment and is motivated to continue with the structured outpatient therapy plan.”</p>
+</blockquote>
+
+<p>✅ Clear answer grounded in chunk content. Matches meaning, not just keywords.</p>
+
+<hr />
+
+<p><strong>🔹 Qwen2.5-32B</strong></p>
+
+<blockquote>
+  <p>“Jordan M. is looking forward to the outpatient plan and is motivated to continue with structured therapy, indicating anticipation for these future activities.”</p>
+</blockquote>
+
+<p>✅ Strong result with richer phrasing and implied intent. Aligns well with query.</p>
+
+<hr />
+
+<p><strong>🔹 GPT-4</strong></p>
+
+<blockquote>
+  <p>“Jordan M. appears to be looking forward to continuing structured therapy and building a routine, as indicated by their motivation and acknowledgment that the outpatient plan is ‘a good next step.’ They have also been provided with a calendar reminder and contact details for an intake appointment, suggesting anticipation of future care.”</p>
+</blockquote>
+
+<p>✅ Best synthesis. Integrates multiple signals from chunk content. Demonstrates grounding and inference.</p>
+
+<hr />
+
+<blockquote>
+  <p>Prompting for “a short, informative sentence or two” (instead of “just a few words”) made a significant difference. Reformulated queries + reranked proposition chunks enabled smaller models to approach GPT-4-level answers.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="next-steps">Next Steps</h2>
+
+<ul>
+  <li>Train a FlanT5 propositionizer using GPT-generated examples</li>
+  <li>Add filters for patient ID and note timestamp at query time</li>
+  <li>Explore chunking beyond propositions: spans, entities, templates</li>
+  <li>Evaluate generalizability across clinical QA tasks</li>
+</ul>
+
+<hr />
+
+<p>If you’re working on clinical RAG systems and these thoughts hit home, reach out. Let’s discuss how to work together.</p>
+
+        </div>
+
+        <div class="post-footer">
+          <a href="/blog">← all posts</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2025 Zardar Khan
+    </div>
+  </footer>
+</body>
+</html>

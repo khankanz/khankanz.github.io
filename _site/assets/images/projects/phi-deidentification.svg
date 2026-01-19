@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  <!-- Document -->
+  <rect x="80" y="40" width="240" height="220" rx="4" fill="#fff" stroke="#e5e7eb" stroke-width="2"/>
+  <!-- Text lines with redactions -->
+  <rect x="100" y="70" width="120" height="8" rx="2" fill="#6b7280" opacity="0.3"/>
+  <rect x="230" y="70" width="60" height="8" rx="2" fill="#059669" opacity="0.4"/>
+  <rect x="100" y="95" width="80" height="8" rx="2" fill="#6b7280" opacity="0.3"/>
+  <rect x="190" y="95" width="70" height="8" rx="2" fill="#1a1a1a" opacity="0.8"/>
+  <rect x="100" y="120" width="140" height="8" rx="2" fill="#6b7280" opacity="0.3"/>
+  <rect x="100" y="145" width="50" height="8" rx="2" fill="#1a1a1a" opacity="0.8"/>
+  <rect x="160" y="145" width="100" height="8" rx="2" fill="#6b7280" opacity="0.3"/>
+  <rect x="100" y="170" width="90" height="8" rx="2" fill="#6b7280" opacity="0.3"/>
+  <rect x="200" y="170" width="80" height="8" rx="2" fill="#1a1a1a" opacity="0.8"/>
+  <rect x="100" y="195" width="130" height="8" rx="2" fill="#6b7280" opacity="0.3"/>
+  <!-- Shield icon -->
+  <path d="M330 130 L330 160 Q330 180 310 190 Q290 180 290 160 L290 130 L310 120 Z" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="2"/>
+  <path d="M302 155 L308 161 L320 149" stroke="#059669" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</svg>

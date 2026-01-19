@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fa"/>
+      <stop offset="100%" style="stop-color:#e9ecef"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#bg1)"/>
+  <!-- JSON brackets -->
+  <text x="40" y="80" font-family="monospace" font-size="48" fill="#059669" opacity="0.9">{</text>
+  <text x="340" y="180" font-family="monospace" font-size="48" fill="#059669" opacity="0.9">}</text>
+  <!-- Schema lines -->
+  <rect x="80" y="70" width="120" height="8" rx="4" fill="#059669" opacity="0.7"/>
+  <rect x="80" y="95" width="180" height="8" rx="4" fill="#6b7280" opacity="0.3"/>
+  <rect x="80" y="120" width="140" height="8" rx="4" fill="#6b7280" opacity="0.3"/>
+  <rect x="80" y="145" width="200" height="8" rx="4" fill="#059669" opacity="0.7"/>
+  <rect x="80" y="170" width="100" height="8" rx="4" fill="#6b7280" opacity="0.3"/>
+  <!-- Checkmark -->
+  <circle cx="320" cy="60" r="24" fill="#059669" opacity="0.15"/>
+  <path d="M308 60 L316 68 L332 52" stroke="#059669" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

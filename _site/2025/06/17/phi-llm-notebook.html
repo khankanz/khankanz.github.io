@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Using Decoder-Only LLMs for PHI De-Identification: A Minimal Setup — Zardar Khan</title>
+  <meta name="description" content="This was originally a notebook I built for a summer student. The goal: test if decoder-style LLMs can help extract PHI from clinical text — and wrap their ou...">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Nav */
+    .nav {
+      padding: 24px 0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .nav a {
+      margin-right: 24px;
+      color: var(--text-muted);
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --bg-elevated: #f8f9fa;
+      --bg-code: #f1f3f5;
+      --text: #1a1a1a;
+      --text-muted: #6b7280;
+      --accent: #059669;
+      --border: #e5e7eb;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Source Serif 4', Georgia, serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-serif);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    article {
+      padding: 80px 0 48px;
+    }
+
+    .article-header {
+      margin-bottom: 48px;
+    }
+
+    .article-meta {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .back-link {
+      margin-right: 16px;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .content {
+      font-size: 1.05rem;
+    }
+
+    .content > * + * {
+      margin-top: 1.5em;
+    }
+
+    .content h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-top: 2.5em;
+      margin-bottom: 0.5em;
+      padding-top: 1em;
+      border-top: 1px solid var(--border);
+    }
+
+    .content h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 2em;
+      margin-bottom: 0.5em;
+    }
+
+    .content p {
+      color: var(--text-muted);
+    }
+
+    .content strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .content ul, .content ol {
+      padding-left: 1.5em;
+      color: var(--text-muted);
+    }
+
+    .content li {
+      margin-bottom: 0.5em;
+    }
+
+    .content li::marker {
+      color: var(--accent);
+    }
+
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.5em;
+      margin-left: 0;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .content code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: var(--bg-code);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+    }
+
+    .content pre {
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5em;
+      overflow-x: auto;
+      font-size: 0.85rem;
+    }
+
+    .content pre code {
+      background: none;
+      padding: 0;
+    }
+
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3em 0;
+    }
+
+    .content img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .post-footer {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 640px) {
+      article { padding: 48px 0 32px; }
+      h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a href="/">home</a>
+      <a href="/projects">projects</a>
+      <a href="/blog">writing</a>
+      <a href="/resume">resume</a>
+    </div>
+  </nav>
+
+  <main>
+    <article>
+      <div class="container">
+        <div class="article-header">
+          <div class="article-meta">
+            <span>Jun 17, 2025</span>
+          </div>
+          <h1>Using Decoder-Only LLMs for PHI De-Identification: A Minimal Setup</h1>
+        </div>
+
+        <div class="content">
+          <p>This was originally a notebook I built for a summer student. The goal: test if decoder-style LLMs can help extract PHI from clinical text — and wrap their output with simple postprocessing to recover spans and labels in a structured format.</p>
+
+<p>All results below use <strong>Qwen‑2.5‑3B‑Instruct</strong> (≈3B parameters) on a single desktop GPU. Bigger models will likely perform better, but this quick test shows the core idea.</p>
+
+<p>We’ve already fine-tuned several encoder models for this. We also built a baseline using regex and dictionary heuristics. But decoder models like Qwen, trained on broad corpora, offer a chance to extract PHI with very little supervision if we guide them properly.</p>
+
+<h2 id="the-setup">The Setup</h2>
+
+<p>LLMs struggle with exact character positions. Tokenizers don’t operate at character granularity. Asking for <code class="language-plaintext highlighter-rouge">"start"</code> and <code class="language-plaintext highlighter-rouge">"end"</code> positions directly leads to unreliable outputs. So instead, we ask for just this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"exact span from input text" [label]
+</code></pre></div></div>
+
+<p>Then we match that span against the original input using <code class="language-plaintext highlighter-rouge">re.search()</code> to recover offsets ourselves. This avoids all alignment issues and keeps things clean.</p>
+
+<h2 id="the-prompt">The Prompt</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Extract all PHI (Protected Health Information) entities from the "Content" using the exact text spans as they appear. Follow the steps below:
+
+1. Identify PHI entities in the input text.
+2. Assign a label to each entity from this list: hospital, date, month, day, year, holiday, name, person, initials, MRN, medical record number, SIN, social_security_number, social security number, OHIP, identity card number, phone number, address, email, e-mail, email address, fax, location, street, postal code, health insurance id number, health insurance number, insurance number, landline phone number.
+3. Return the exact span of the entity from the input, without rephrasing or normalizing.
+4. Present the results as a list of strings in JSON format, where each string follows this structure:
+   "text span" [label]
+
+Examples:
+
+Content: The patient, MR. JOHN DOE, visited St. VINCENT Hospital on December 12th, 2022. His OHIP: 1234-567-890.
+Output: [
+  "MR. JOHN DOE" [name],
+  "St. VINCENT Hospital" [hospital],
+  "December 12th, 2022" [date],
+  "OHIP: 1234-567-890" [health insurance number]
+]
+
+Content: Contact Dr. LEE-WONG via email: lwong@caremail.org or fax: 555-432-8765. Address: 99 Queen's Blvd., Toronto, ON.
+Output: [
+  "Dr. LEE-WONG" [name],
+  "lwong@caremail.org" [email address],
+  "555-432-8765" [fax],
+  "99 Queen's Blvd., Toronto, ON" [address]
+]
+
+Input: Content: {your clinical text here}
+</code></pre></div></div>
+
+<h2 id="real-example-input">Real Example Input</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LEFT KNEE
+Small joint effusion with lipohemarthrosis. Marginal osteophytosis along the lateral compartment. No fracture.
+_____________
+This report was electronically signed by DONALD, ALPHA, Staff Radiologist on 2010/13/25 at 22:30
+</code></pre></div></div>
+
+<h3 id="model-output-verbatim">Model Output (verbatim)</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"LEFT KNEE"</span><span class="w"> </span><span class="p">[</span><span class="err">location</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"DONALD, ALPHA"</span><span class="w"> </span><span class="p">[</span><span class="err">name</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"2010/13/25"</span><span class="w"> </span><span class="p">[</span><span class="err">date</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"22:30"</span><span class="w"> </span><span class="p">[</span><span class="err">time</span><span class="p">]</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="postprocessed-output">Postprocessed Output</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[{</span><span class="nl">"start"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"end"</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span><span class="nl">"text"</span><span class="p">:</span><span class="s2">"LEFT KNEE"</span><span class="p">,</span><span class="nl">"labels"</span><span class="p">:[</span><span class="s2">"Location"</span><span class="p">]},</span><span class="w">
+ </span><span class="p">{</span><span class="nl">"start"</span><span class="p">:</span><span class="mi">794</span><span class="p">,</span><span class="nl">"end"</span><span class="p">:</span><span class="mi">809</span><span class="p">,</span><span class="nl">"text"</span><span class="p">:</span><span class="s2">"DONALD, ALPHA"</span><span class="p">,</span><span class="nl">"labels"</span><span class="p">:[</span><span class="s2">"Name"</span><span class="p">]},</span><span class="w">
+ </span><span class="p">{</span><span class="nl">"start"</span><span class="p">:</span><span class="mi">832</span><span class="p">,</span><span class="nl">"end"</span><span class="p">:</span><span class="mi">842</span><span class="p">,</span><span class="nl">"text"</span><span class="p">:</span><span class="s2">"2010/13/25"</span><span class="p">,</span><span class="nl">"labels"</span><span class="p">:[</span><span class="s2">"Date"</span><span class="p">]},</span><span class="w">
+ </span><span class="p">{</span><span class="nl">"start"</span><span class="p">:</span><span class="mi">846</span><span class="p">,</span><span class="nl">"end"</span><span class="p">:</span><span class="mi">851</span><span class="p">,</span><span class="nl">"text"</span><span class="p">:</span><span class="s2">"22:30"</span><span class="p">,</span><span class="nl">"labels"</span><span class="p">:[</span><span class="s2">"time"</span><span class="p">]}]</span><span class="w">
+</span></code></pre></div></div>
+
+<p>A few notes:</p>
+<ul>
+  <li>The model invented a <code class="language-plaintext highlighter-rouge">"time"</code> label. We never gave it one.</li>
+  <li>It tagged <code class="language-plaintext highlighter-rouge">"LEFT KNEE"</code> as a <code class="language-plaintext highlighter-rouge">location</code>. Technically true, but not PHI.</li>
+  <li><code class="language-plaintext highlighter-rouge">"DONALD, ALPHA"</code> and <code class="language-plaintext highlighter-rouge">"2010/13/25"</code> were both captured exactly and matched correctly.</li>
+</ul>
+
+<h2 id="another-example">Another Example</h2>
+
+<p><strong>Input:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dr. CHARMS,LUCKY reviewed the patient's file.
+</code></pre></div></div>
+
+<p><strong>Output:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"Dr. CHARMS,LUCKY"</span><span class="w"> </span><span class="p">[</span><span class="err">name</span><span class="p">]</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Postprocessed:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[{</span><span class="nl">"start"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="nl">"end"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="nl">"text"</span><span class="p">:</span><span class="s2">"CHARMS,LUCKY"</span><span class="p">,</span><span class="nl">"labels"</span><span class="p">:[</span><span class="s2">"Name"</span><span class="p">]}]</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="takeaways">Takeaways</h2>
+
+<p>Use decoder LLMs for what they’re good at: labeling spans. Don’t ask them to think in characters. Instead, extract raw spans and reconstruct structure with simple Python logic. This gives you:</p>
+<ul>
+  <li>Exact offsets</li>
+  <li>Clean, valid JSON</li>
+  <li>Full control over downstream formatting</li>
+</ul>
+
+<p>Even a 3B model can produce usable PHI annotations quickly. The approach still needs deeper evaluation, better prompt tuning, and strict label control, but the core idea works and is light to implement.</p>
+
+<p>If you’re working on clinical de‑identification and want to dig deeper, reach out.</p>
+
+
+        </div>
+
+        <div class="post-footer">
+          <a href="/blog">← all posts</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2025 Zardar Khan
+    </div>
+  </footer>
+</body>
+</html>

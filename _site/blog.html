@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing — Zardar Khan</title>
+  <meta name="description" content="Technical writing on RAG, clinical NLP, constrained decoding, and production ML systems.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Nav */
+    .nav {
+      padding: 24px 0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .nav a {
+      margin-right: 24px;
+      color: var(--text-muted);
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --bg-elevated: #f8f9fa;
+      --text: #1a1a1a;
+      --text-muted: #6b7280;
+      --accent: #059669;
+      --border: #e5e7eb;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Source Serif 4', Georgia, serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-serif);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .page-header {
+      padding: 80px 0 48px;
+    }
+
+    .page-header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .back-link {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .posts-list {
+      border-top: 1px solid var(--border);
+    }
+
+    .post-item {
+      display: block;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      color: inherit;
+    }
+
+    .post-item:hover {
+      background: var(--bg-elevated);
+      margin: 0 -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .post-date {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .post-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .post-item:hover .post-title {
+      color: var(--accent);
+    }
+
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 48px;
+    }
+
+    @media (max-width: 640px) {
+      .page-header { padding: 48px 0 32px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a href="/">home</a>
+      <a href="/projects">projects</a>
+      <a href="/blog">writing</a>
+      <a href="/resume">resume</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>writing</h1>
+      </div>
+
+      <div class="posts-list">
+        
+        <a href="/2025/10/30/ml-pipeline.html" class="post-item">
+          <div class="post-date">Oct 2025</div>
+          <div class="post-title">Building a ML Pipeline for Microcalcification Classification in OMOP</div>
+        </a>
+        
+        <a href="/2025/09/03/on-augmented-data.html" class="post-item">
+          <div class="post-date">Sep 2025</div>
+          <div class="post-title">On Building Augmented Datasets: A Practical Case Study</div>
+        </a>
+        
+        <a href="/2025/06/27/road-to-sota-pii-model.html" class="post-item">
+          <div class="post-date">Jun 2025</div>
+          <div class="post-title">Road to a SOTA PII Model</div>
+        </a>
+        
+        <a href="/2025/06/17/phi-llm-notebook.html" class="post-item">
+          <div class="post-date">Jun 2025</div>
+          <div class="post-title">Using Decoder-Only LLMs for PHI De-Identification: A Minimal Setup</div>
+        </a>
+        
+        <a href="/2025/06/16/rag-experiments.html" class="post-item">
+          <div class="post-date">Jun 2025</div>
+          <div class="post-title">RAG Experiments: Chunking, Retrieval, Reformulation</div>
+        </a>
+        
+        <a href="/2025/01/19/building-bookkeeping-agent.html" class="post-item">
+          <div class="post-date">Jan 2025</div>
+          <div class="post-title">Building a Bookkeeping Agent: What Worked, What Didn't</div>
+        </a>
+        
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2025 Zardar Khan
+    </div>
+  </footer>
+</body>
+</html>
