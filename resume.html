@@ -301,26 +301,75 @@ title: Resume — Zardar Khan
           <a href="https://linkedin.com/in/zardar-khan">linkedin</a>
         </div>
         <p class="resume-summary">
-          research software engineer building ml systems in healthcare. constrained decoding, clinical rag, phi de-identification. i ship fast and go deep.
+          I build ML systems in healthcare—messy data, tight timelines, real consequences. 4+ years shipping production pipelines: constrained decoding (180x speedup), clinical RAG (3 weeks to trial), PHI de-identification (45% → 90% F1). I reverse-engineer undocumented systems and make them work.
         </p>
       </div>
 
       <div class="resume-section">
-        <h2 class="section-title">skills</h2>
-        <div class="skills-grid">
-          <span class="skill-category">llms & nlp</span>
-          <span class="skill-items">transformers, llama.cpp, vllm, rag, tool-use agents, constrained decoding, ner</span>
+        <h2 class="section-title">work</h2>
 
-          <span class="skill-category">infra</span>
-          <span class="skill-items">fastapi, docker, postgres, fhir/omop</span>
+        <div class="experience">
+          <div class="exp-header">
+            <div class="exp-company">Constrained Decoding for Medical JSON <a href="https://github.com/khankanz/tayz_decoding" style="font-weight:400;font-size:0.85rem;">code</a></div>
+            <div class="exp-meta">2025</div>
+          </div>
+          <ul>
+            <li>Pathology reports → structured JSON. Prompt-only approaches hit ~67% validity. Not good enough at scale.</li>
+            <li>Built two-stage pipeline: reason first, then constrained emit. Monkey-patched xgrammar into llama.cpp (27x), then vLLM migration with continuous batching (7x more).</li>
+            <li>180x speedup (3 min → 1 sec). 100% schema validity. 17K reports in 5 hrs. Scaling to 1M+.</li>
+          </ul>
+        </div>
 
-          <span class="skill-category">core</span>
-          <span class="skill-items">python, pytorch, sql</span>
+        <div class="experience">
+          <div class="exp-header">
+            <div class="exp-company">Caring Contacts RAG</div>
+            <div class="exp-meta">2024</div>
+          </div>
+          <ul>
+            <li>Discharge letters for psychiatric patients that reference specific details from their stay.</li>
+            <li>BM25 → reranker. Proposition-level chunking beat doc/paragraph for retrieval. Prompt guardrails for safety.</li>
+            <li>Concept to clinical trial in 3 weeks. Presented ISBD 2025 (Japan), IASR 2025 (Boston).</li>
+          </ul>
+        </div>
+
+        <div class="experience">
+          <div class="exp-header">
+            <div class="exp-company">Mammography Classification <a href="https://github.com/khankanz/mammogram-pipeline" style="font-weight:400;font-size:0.85rem;">code</a></div>
+            <div class="exp-meta">2024</div>
+          </div>
+          <ul>
+            <li>Sort DICOMs by artifact type (mag view, biopsy tool). Metadata too inconsistent to trust.</li>
+            <li>EfficientNet + active learning: 50 labels → 90% accuracy on 400 samples.</li>
+          </ul>
+        </div>
+
+        <div class="experience">
+          <div class="exp-header">
+            <div class="exp-company">PHI De-identification</div>
+            <div class="exp-meta">2024</div>
+          </div>
+          <ul>
+            <li>MIMIC/i2b2 models miss hospital-specific patterns—too generic for our data.</li>
+            <li>Built synthetic data pipeline: SQL → sample real PHI patterns → GPT-4 generates text with XML placeholders → swap identifiers back in → train NER.</li>
+            <li>45% → 75% F1. Mentored student who pushed to 90%.</li>
+          </ul>
+        </div>
+
+        <div class="experience">
+          <div class="exp-header">
+            <div class="exp-company">FHIR Extraction</div>
+            <div class="exp-meta">2023</div>
+          </div>
+          <ul>
+            <li>Needed 2M+ clinical reports. Existing queries took 120 days.</li>
+            <li>Reverse-engineered undocumented Observation → DiagnosticReport structure. Temporary Postgres indexes.</li>
+            <li>120 days → 4 hours (700x). Found 500K missing reports from import errors.</li>
+          </ul>
         </div>
       </div>
 
       <div class="resume-section">
-        <h2 class="section-title">experience</h2>
+        <h2 class="section-title">jobs</h2>
 
         <div class="experience">
           <div class="exp-header">
@@ -328,10 +377,9 @@ title: Resume — Zardar Khan
             <div class="exp-meta">research software engineer · sept 2023 – present · toronto</div>
           </div>
           <ul>
-            <li>built constrained decoding pipeline for pathology reports—180x speedup, 100% schema validity on 17k reports</li>
-            <li>shipped clinical rag system in 3 weeks, now in clinical trial for psychiatric discharge letters</li>
-            <li>created synthetic data pipeline for phi detection—45% → 90% F1</li>
-            <li>reverse-engineered fhir data model, reduced extraction time from 120 days to 4 hours</li>
+            <li>Sole ML engineer across 3 research labs. Built all pipelines above. Go-to for pathology/radiology report extraction—wrote custom parsing to stitch fragmented reports that appear line-by-line.</li>
+            <li>Routinely pull and create datasets with thousands of reports for downstream research. Work adopted by 2 external labs.</li>
+            <li>Quantized RadBERT classifier: 450ms → <100ms (4.5x), 95% accuracy. Oral presentation at IGTxIMNO 2024.</li>
           </ul>
         </div>
 
@@ -341,28 +389,42 @@ title: Resume — Zardar Khan
             <div class="exp-meta">software engineer · aug 2021 – sept 2023 · toronto</div>
           </div>
           <ul>
-            <li>rebuilt clinical transcription from batch to real-time streaming with azure stt</li>
-            <li>diagnosed chrome memory limits breaking voice recording, implemented streaming compression</li>
+            <li>Real-time transcription (WebSocket + Azure STT, replaced 30s batch). Medication extraction (GPT-Neo).</li>
+            <li>Fixed Chrome 2GB memory bug killing long recordings.</li>
           </ul>
-        </div>
-
-        <div class="experience">
-          <div class="exp-header">
-            <div class="exp-company">Techna Institute</div>
-            <div class="exp-meta">business application analyst · nov 2018 – nov 2020 · toronto</div>
-          </div>
         </div>
       </div>
 
       <div class="resume-section">
-        <h2 class="section-title">publications</h2>
-        <p class="publication"><span class="pub-title">AI-Personalized Caring Contacts</span> — IASR 2025, ISBD 2025</p>
-        <p class="publication"><span class="pub-title">RadBERT Microcalcification Classifier</span> — IGTxIMNO 2024 (oral)</p>
+        <h2 class="section-title">side projects</h2>
+        <p class="publication"><span class="pub-title">Bookkeeping Agent</span> — Built tool-use agent from scratch. Hit context limits on large files, calculator failed on OCR errors, pivoted to DuckDB for SQL on CSVs. Found I was spending $70/mo on Starbucks.</p>
+        <p class="publication"><span class="pub-title">Semantic Routers for MoE</span> — Cohere fellowship pitch. Proposed learnable expert embeddings over linear routers. Got rejected. Revisiting at tiny scale.</p>
+        <p class="publication"><span class="pub-title">Pronunciation App</span> — LLM-as-judge for my daughter's reading. Customer base of 1, retention 100%.</p>
       </div>
 
       <div class="resume-section">
         <h2 class="section-title">education</h2>
         <p class="education"><span class="edu-degree">BEng, Biomedical Engineering</span> — Toronto Metropolitan University</p>
+      </div>
+
+      <div class="resume-section">
+        <h2 class="section-title">publications</h2>
+        <p class="publication"><span class="pub-title">Khan Z et al. AI-Personalized Caring Contacts</span> — IASR 2025 (Boston), ISBD 2025 (Japan)</p>
+        <p class="publication"><span class="pub-title">Khan Z et al. RadBERT Microcalcification Classifier</span> — IGTxIMNO 2024 (Oral Presentation)</p>
+      </div>
+
+      <div class="resume-section">
+        <h2 class="section-title">skills</h2>
+        <div class="skills-grid">
+          <span class="skill-category">llms & nlp</span>
+          <span class="skill-items">Transformers, llama.cpp, vLLM, RAG, Tool-use Agents, Constrained Decoding, NER</span>
+
+          <span class="skill-category">mltic</span>
+          <span class="skill-items">Quantization, Active Learning, Knowledge Distillation, Synthetic Data Generation</span>
+
+          <span class="skill-category">stack</span>
+          <span class="skill-items">PyTorch, FHIR, Postgres, Docker, AWS/Azure, FastAPI</span>
+        </div>
       </div>
     </div>
   </main>
