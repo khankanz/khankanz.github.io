@@ -2,6 +2,7 @@
 layout: post
 title: "Road to a SOTA PII Model"
 date: 2025-06-27
+excerpt: "From PhysioNet heuristics tagging 'pain' as a name to 75% F1."
 categories: [nlp, ner, medical-ai]
 ---
 

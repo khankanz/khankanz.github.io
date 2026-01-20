@@ -2,6 +2,7 @@
 layout: post
 title: "Using Decoder-Only LLMs for PHI De-Identification: A Minimal Setup"
 date: 2025-06-17
+excerpt: "Skip asking for character positions—just get spans and regex the rest."
 categories: [nlp, llm, medical-nlp, phi]
 tags: [LLM, PHI, Qwen, De-Identification, Clinical NLP, Jupyter, Transformers]
 ---

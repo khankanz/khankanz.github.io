@@ -2,7 +2,7 @@
 layout: post
 title: "When 75% Isn't Enough: Trying to Distill GPT-4 into GLiNER"
 date: 2025-07-15
-excerpt: "Had a PHI detection model hitting 75% F1. Wondered if knowledge distillation could push it higher. Spoiler: it didn't work. But I learned a lot about why."
+excerpt: "Prompted probabilities aren't real probabilities. That's why this failed."
 tags: [knowledge-distillation, gliner, gpt-4, ner, incomplete]
 ---
 

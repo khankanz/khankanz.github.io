@@ -108,10 +108,17 @@ title: Writing — Zardar Khan
       font-weight: 600;
       color: var(--text);
       line-height: 1.4;
+      margin-bottom: 6px;
     }
 
     .post-item:hover .post-title {
       color: var(--accent);
+    }
+
+    .post-hook {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
     }
 
     footer {
@@ -149,6 +156,7 @@ title: Writing — Zardar Khan
         <a href="{{ post.url }}" class="post-item">
           <div class="post-date">{{ post.date | date: "%b %Y" }}</div>
           <div class="post-title">{{ post.title }}</div>
+          {% if post.excerpt %}<div class="post-hook">{{ post.excerpt }}</div>{% endif %}
         </a>
         {% endfor %}
       </div>

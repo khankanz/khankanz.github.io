@@ -2,7 +2,7 @@
 layout: post
 title: "RAG Experiments: Chunking, Retrieval, Reformulation"
 date: 2025-06-16
-excerpt: "Chunking, hybrid retrieval, and reformulation strategies for clinical RAG pipelines, including Dense X Retrieval and proposition-based methods."
+excerpt: "Proposition-level chunking beat paragraphs for pulling personal details from clinical notes."
 tags: [rag, clinical-nlp, retrieval, chunking, query-reformulation, hybrid-retrieval]
 ---
 

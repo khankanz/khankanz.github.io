@@ -2,7 +2,7 @@
 layout: post
 title: "MedColBERT: Late Interaction Retrieval for Clinical Text"
 date: 2024-12-15
-excerpt: "Adapting JaColBERT's training recipe to medical retrieval. Built datasets from BioASQ and OMOP concept mappings. Got stuck at indexing. Incomplete."
+excerpt: "JaColBERT's training recipe fixed ColBERT's in-domain underperformance. Could it work for medical retrieval?"
 tags: [colbert, retrieval, medical-nlp, bioasq, omop, incomplete]
 ---
 

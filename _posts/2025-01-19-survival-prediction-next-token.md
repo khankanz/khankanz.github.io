@@ -2,7 +2,7 @@
 layout: post
 title: "Framing Survival Prediction as Next-Token: A Failed Experiment"
 date: 2025-01-19
-excerpt: "Read the Cell2Sentence paper and thought: what if survival prediction could be framed as next-token prediction? I never finished it, but the idea was too interesting not to document."
+excerpt: "Cell2Sentence orders genes by expression. Could clinical features be ordered the same way?"
 tags: [cell2sentence, kaggle, llm, tabular, incomplete]
 ---
 

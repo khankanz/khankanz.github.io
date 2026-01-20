@@ -2,7 +2,7 @@
 layout: post
 title: "On Building Augmented Datasets: A Practical Case Study"
 date: 2025-09-03
-excerpt: "Why purely synthetic data failed for medical NER, and how augmenting real PHI with GPT-4 generated context achieved 75% F1 score."
+excerpt: "Why hospital-specific training data matters more than MIMIC."
 tags: [data-augmentation, phi-deidentification, ner, synthetic-data, medical-nlp, data-quality]
 ---
 

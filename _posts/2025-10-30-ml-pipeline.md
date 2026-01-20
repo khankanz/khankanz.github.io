@@ -2,7 +2,7 @@
 layout: post
 title: "Building a ML Pipeline for Microcalcification Classification in OMOP"
 date: 2025-10-30
-excerpt: "A technical walkthrough of an end-to-end ML pipeline that classifies radiology reports and integrates structured findings into an OMOP database."
+excerpt: "OMOP's non-auto-incrementing PKs taught me more about database design than any tutorial."
 tags: [ml-pipeline, omop, fhir, database-integration, nlp, radiology, sqlalchemy, pydantic, deberta]
 ---
 
