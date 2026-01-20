@@ -372,6 +372,33 @@ title: Projects — Zardar Khan
         </div>
       </div>
 
+      <div class="project" id="nlp-omop-pipeline">
+        <div class="project-content">
+          <div class="project-header">
+            <h2>NLP to OMOP Pipeline</h2>
+            <span class="project-date">2024</span>
+          </div>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>fhir.resources</span>
+            <span>FHIR R4</span>
+            <span>OMOP CDM</span>
+          </div>
+          <p class="project-tagline">NLP inference is useless if the output can't go anywhere.</p>
+          <div class="project-body">
+            <p>After mammography classification comes the harder question: where does the output go? Built FHIR R4 resources from NLP predictions using the HL7 Breast Radiology Implementation Guide as the spec.</p>
+            <p>The resource chain: Device (the NLP model as a "software device") → Composition (the structured report container) → Observation (the actual finding). Each links back through references. Terminology mapping from RadLex to SNOMED for interoperability.</p>
+            <p>The real learning: healthcare interoperability is 80% terminology mapping, 15% spec interpretation, 5% actual code. FHIR is well-documented; OMOP CDM is not. Most of my time was spent figuring out which OMOP table a breast density finding belongs in (hint: it's Observation, but the reasoning isn't obvious).</p>
+          </div>
+          <div class="project-links">
+            <strong>Links:</strong> <a href="/assets/biomatrix-pipeline-v3-ppt.pdf" target="_blank">Architecture</a> <a href="/assets/omop-toronto-zk-pdf.pdf" target="_blank">OMOP Slides</a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="/assets/images/projects/nlp-omop-pipeline.svg" alt="FHIR to OMOP pipeline diagram">
+        </div>
+      </div>
+
       <div class="side-header" id="side-projects">
         <h2>side projects</h2>
       </div>
