@@ -6,6 +6,7 @@ author: "Zardar Khan"
 # Build settings
 markdown: kramdown
 highlighter: rouge
+future: true
 
 # Plugins
 plugins:
