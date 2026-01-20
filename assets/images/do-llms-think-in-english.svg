@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200">
+  <rect width="500" height="200" fill="#f8f9fa"/>
+
+  <!-- Central English reasoning chain -->
+  <rect x="100" y="70" width="300" height="60" rx="4" fill="#059669" opacity="0.15" stroke="#059669" stroke-width="1.5"/>
+  <text x="250" y="95" font-family="monospace" font-size="11" fill="#059669" text-anchor="middle">reasoning scaffold</text>
+  <text x="250" y="115" font-family="monospace" font-size="9" fill="#059669" text-anchor="middle" opacity="0.7">(always english)</text>
+
+  <!-- Multilingual decorations floating around -->
+  <text x="60" y="50" font-family="serif" font-size="10" fill="#6b7280" font-style="italic">Schadenfreude</text>
+  <text x="380" y="45" font-family="serif" font-size="9" fill="#6b7280" font-style="italic">現実を見る</text>
+  <text x="45" y="150" font-family="serif" font-size="9" fill="#6b7280" font-style="italic">Zuverlässigkeit</text>
+  <text x="390" y="160" font-family="serif" font-size="9" fill="#6b7280" font-style="italic">باتیں کم</text>
+  <text x="220" y="170" font-family="serif" font-size="9" fill="#6b7280" font-style="italic">No es maldad</text>
+  <text x="70" y="95" font-family="serif" font-size="8" fill="#6b7280" font-style="italic">saudade</text>
+  <text x="420" y="100" font-family="serif" font-size="8" fill="#6b7280" font-style="italic">わびさび</text>
+
+  <!-- Dashed lines showing decoration, not integration -->
+  <path d="M95 50 L100 70" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="2,2"/>
+  <path d="M400 50 L400 70" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="2,2"/>
+  <path d="M80 140 L100 130" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="2,2"/>
+  <path d="M415 150 L400 130" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- Label -->
+  <text x="250" y="190" font-family="monospace" font-size="8" fill="#6b7280" text-anchor="middle">rhetoric, not cognition</text>
+</svg>
