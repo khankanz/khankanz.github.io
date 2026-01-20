@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Do LLMs Think in English?"
-date: 2025-01-20
+date: 2026-01-20
 excerpt: "Models use multilingual concepts as rhetorical devices, not reasoning primitives."
 tags: [llm, multilingual, reasoning, chain-of-thought, exploratory]
 ---
