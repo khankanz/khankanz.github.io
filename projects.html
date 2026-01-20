@@ -381,14 +381,19 @@ title: Projects — Zardar Khan
           <div class="project-tags">
             <span>Python</span>
             <span>fhir.resources</span>
-            <span>FHIR R4</span>
+            <span>fhirpy</span>
+            <span>Aidbox</span>
             <span>OMOP CDM</span>
+            <span>nbdev</span>
           </div>
           <p class="project-tagline">NLP inference is useless if the output can't go anywhere.</p>
           <div class="project-body">
-            <p>After mammography classification comes the harder question: where does the output go? Built FHIR R4 resources from NLP predictions using the HL7 Breast Radiology Implementation Guide as the spec.</p>
-            <p>The resource chain: Device (the NLP model as a "software device") → Composition (the structured report container) → Observation (the actual finding). Each links back through references. Terminology mapping from RadLex to SNOMED for interoperability.</p>
-            <p>The real learning: healthcare interoperability is 80% terminology mapping, 15% spec interpretation, 5% actual code. FHIR is well-documented; OMOP CDM is not. Most of my time was spent figuring out which OMOP table a breast density finding belongs in (hint: it's Observation, but the reasoning isn't obvious).</p>
+            <p>Had DeBERTa classifiers extracting microcalcification status and BI-RADS categories from radiology reports. The models worked. But clinical research needs structured data in standardized formats—FHIR for interoperability, OMOP for analytics. Model outputs were stranded as JSON blobs.</p>
+            <p>Built the full pipeline: report in → NLP inference → FHIR resources → OMOP tables.</p>
+            <p><strong>The FHIR piece:</strong> Following the HL7 Breast Radiology IG, I extended <code>fhir.resources</code> with custom profiles. The IG is deeply nested—a microcalcification finding requires Device → Composition → Report Section → Findings BiLateral Breast Section → Mg Findings Observation → Calcification Observation → Calcification Presence Component (where the NLP label finally lives). Each resource references children by ID, built bottom-up. Created a class hierarchy to handle modality-specific codes while sharing structure.</p>
+            <p><strong>Terminology mapping:</strong> NLP outputs "Positive"/"Negative". FHIR wants RadLex codes (RDE1556_present). OMOP wants SNOMED (10828004). Built a YAML-based mapping layer—single function call converts NLP labels to any target coding system.</p>
+            <p><strong>Aidbox integration:</strong> Extended fhirpy's <code>AsyncFHIRResource</code> with a proper <code>upsert</code> method—search by device name/manufacturer, update if exists, create if not. Stock library didn't support this.</p>
+            <p><strong>What I learned:</strong> Healthcare interoperability is 80% understanding the data models. The Breast Radiology IG has nested Observations five levels deep. If you don't map this out first, you'll build something that "works" but isn't compliant.</p>
           </div>
           <div class="project-links">
             <strong>Links:</strong> <a href="/assets/biomatrix-pipeline-v3-ppt.pdf" target="_blank">Architecture</a> <a href="/assets/omop-toronto-zk-pdf.pdf" target="_blank">OMOP Slides</a>

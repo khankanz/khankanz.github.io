@@ -1,41 +1,44 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
   <rect width="400" height="300" fill="#f8f9fa"/>
-  <!-- Pipeline flow -->
-  <!-- NLP Output box -->
-  <rect x="30" y="120" width="70" height="40" rx="4" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="1.5"/>
-  <text x="65" y="145" font-family="monospace" font-size="9" fill="#059669" text-anchor="middle">NLP Output</text>
 
-  <!-- Arrow 1 -->
-  <path d="M105 140 L135 140" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Title -->
+  <text x="200" y="25" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">report → NLP → FHIR → OMOP</text>
 
-  <!-- FHIR Resources box -->
-  <rect x="140" y="100" width="80" height="80" rx="4" fill="#059669" opacity="0.15" stroke="#059669" stroke-width="1.5"/>
-  <text x="180" y="125" font-family="monospace" font-size="8" fill="#059669" text-anchor="middle">Device</text>
-  <text x="180" y="140" font-family="monospace" font-size="8" fill="#059669" text-anchor="middle">Composition</text>
-  <text x="180" y="155" font-family="monospace" font-size="8" fill="#059669" text-anchor="middle">Observation</text>
-  <text x="180" y="170" font-family="monospace" font-size="7" fill="#6b7280" text-anchor="middle">(FHIR R4)</text>
+  <!-- Nested FHIR structure visualization -->
+  <rect x="40" y="45" width="200" height="180" rx="4" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="50" y="60" font-family="monospace" font-size="7" fill="#6b7280">Device (NLP model)</text>
 
-  <!-- Arrow 2 -->
-  <path d="M225 140 L255 140" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="50" y="70" width="180" height="145" rx="3" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="60" y="85" font-family="monospace" font-size="7" fill="#6b7280">Composition</text>
 
-  <!-- OMOP CDM box -->
-  <rect x="260" y="120" width="70" height="40" rx="4" fill="#059669" stroke="#059669" stroke-width="1.5"/>
-  <text x="295" y="145" font-family="monospace" font-size="9" fill="#ffffff" text-anchor="middle">OMOP CDM</text>
+  <rect x="60" y="95" width="160" height="110" rx="3" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="70" y="110" font-family="monospace" font-size="7" fill="#6b7280">Report Section</text>
+
+  <rect x="70" y="120" width="140" height="75" rx="3" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="80" y="135" font-family="monospace" font-size="7" fill="#6b7280">Mg Findings</text>
+
+  <rect x="80" y="145" width="120" height="40" rx="3" fill="#059669" opacity="0.15" stroke="#059669" stroke-width="1.5"/>
+  <text x="90" y="162" font-family="monospace" font-size="7" fill="#059669">Calcification Obs</text>
+  <text x="90" y="178" font-family="monospace" font-size="8" fill="#059669" font-weight="bold">← NLP label</text>
+
+  <!-- Arrow to OMOP -->
+  <path d="M250 140 L280 140" stroke="#6b7280" stroke-width="1.5"/>
+  <path d="M275 135 L285 140 L275 145" fill="#6b7280"/>
+
+  <!-- OMOP box -->
+  <rect x="290" y="100" width="80" height="80" rx="4" fill="#059669" stroke="#059669" stroke-width="1.5"/>
+  <text x="330" y="130" font-family="monospace" font-size="9" fill="#ffffff" text-anchor="middle">OMOP</text>
+  <text x="330" y="145" font-family="monospace" font-size="7" fill="#ffffff" text-anchor="middle" opacity="0.8">observation</text>
+  <text x="330" y="160" font-family="monospace" font-size="7" fill="#ffffff" text-anchor="middle" opacity="0.8">table</text>
 
   <!-- Terminology mapping annotation -->
-  <path d="M180 95 L180 70 L295 70 L295 115" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,2" fill="none"/>
-  <text x="240" y="60" font-family="monospace" font-size="7" fill="#6b7280" text-anchor="middle">RadLex → SNOMED</text>
+  <text x="265" y="95" font-family="monospace" font-size="6" fill="#6b7280" text-anchor="middle">RadLex</text>
+  <text x="265" y="105" font-family="monospace" font-size="6" fill="#6b7280" text-anchor="middle">↓</text>
+  <text x="265" y="115" font-family="monospace" font-size="6" fill="#6b7280" text-anchor="middle">SNOMED</text>
 
-  <!-- HL7 IG label -->
-  <text x="180" y="200" font-family="monospace" font-size="7" fill="#6b7280" text-anchor="middle">HL7 Breast Radiology IG</text>
+  <!-- Depth indicator -->
+  <text x="30" y="250" font-family="monospace" font-size="8" fill="#6b7280">5 levels deep</text>
 
   <!-- Bottom insight -->
-  <text x="200" y="270" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">interoperability: the real deliverable</text>
-
-  <!-- Arrow marker definition -->
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#6b7280"/>
-    </marker>
-  </defs>
+  <text x="200" y="280" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">80% understanding data models</text>
 </svg>
