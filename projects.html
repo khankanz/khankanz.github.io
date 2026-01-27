@@ -163,6 +163,116 @@ title: Projects — Zardar Khan
       background: var(--bg-elevated);
     }
 
+    .pronunciation-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .pronunciation-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .lightbox-trigger {
+      border: 0;
+      padding: 0;
+      background: none;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .lightbox-trigger img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .lightbox-trigger:hover img {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    .lightbox-trigger:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 10px;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.62);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 2000;
+    }
+
+    .lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+    }
+
+    .lightbox.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-content {
+      position: relative;
+      z-index: 1;
+      width: 90vw;
+      height: 90vh;
+      background: var(--bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      box-shadow: 0 30px 60px rgba(15, 23, 42, 0.28);
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.2);
+    }
+
     .image-placeholder {
       width: 100%;
       aspect-ratio: 4/3;
@@ -424,6 +534,14 @@ title: Projects — Zardar Khan
             <p>My daughter reads Harry Potter but says "marriage" for "mirage". Strong comprehension, weak decoding. Wanted something that could give her real-time feedback.</p>
             <p>Built a pipeline: speech → IPA transcription → compare against gold pronunciation → LLM-as-judge with rubric scoring. Built it in evening sessions with her as the tester.</p>
             <p>Working prototype. Customer base of 1, retention 100%.</p>
+            <div class="pronunciation-gallery">
+              <button class="lightbox-trigger" type="button" data-image="/assets/farabi-redesign-home.png" data-alt="Farabi pronunciation app home redesign">
+                <img src="/assets/farabi-redesign-home.png" alt="Farabi pronunciation app home redesign">
+              </button>
+              <button class="lightbox-trigger" type="button" data-image="/assets/farabi-redesign-challenge.png" data-alt="Farabi pronunciation app challenge redesign">
+                <img src="/assets/farabi-redesign-challenge.png" alt="Farabi pronunciation app challenge redesign">
+              </button>
+            </div>
           </div>
         </div>
         <div class="project-image">
@@ -589,10 +707,64 @@ title: Projects — Zardar Khan
     </div>
   </main>
 
+  <div class="lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop" data-lightbox-close></div>
+    <div class="lightbox-content" role="dialog" aria-modal="true" aria-label="Image preview">
+      <button class="lightbox-close" type="button" data-lightbox-close aria-label="Close image preview">&times;</button>
+      <img class="lightbox-image" src="" alt="">
+    </div>
+  </div>
+
   <footer>
     <div class="container">
       © 2025 Zardar Khan
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const lightbox = document.querySelector('.lightbox');
+      if (!lightbox) return;
+
+      const image = lightbox.querySelector('.lightbox-image');
+      const closeTriggers = lightbox.querySelectorAll('[data-lightbox-close]');
+      const triggers = document.querySelectorAll('.lightbox-trigger');
+
+      const openLightbox = (src, alt) => {
+        image.src = src;
+        image.alt = alt || '';
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeLightbox = () => {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        image.src = '';
+        image.alt = '';
+        document.body.style.overflow = '';
+      };
+
+      triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const img = trigger.querySelector('img');
+          const src = trigger.dataset.image || (img ? img.src : '');
+          const alt = trigger.dataset.alt || (img ? img.alt : '');
+          openLightbox(src, alt);
+        });
+      });
+
+      closeTriggers.forEach((trigger) => {
+        trigger.addEventListener('click', closeLightbox);
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && lightbox.classList.contains('is-open')) {
+          closeLightbox();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
